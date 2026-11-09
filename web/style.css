@@ -1,0 +1,139 @@
+:root {
+    color-scheme: dark;
+    --violet: #a78bfa;
+    --ink: #100d17;
+    --muted: #c2bacf;
+    font-family: "Segoe UI", sans-serif;
+    color: #fff;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; overflow: hidden; background: transparent; user-select: none; }
+button { color: inherit; font: inherit; cursor: pointer; }
+button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+.wheel-overlay {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(ellipse at center, #0b0716aa, #09070c55 63%, transparent);
+}
+
+.dial {
+    position: relative;
+    width: min(510px, 79vh, 90vw);
+    aspect-ratio: 1;
+    animation: enter 150ms ease-out;
+}
+
+.sectors, .actions { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.sectors path { fill: #14111eee; stroke: #624897; stroke-width: 1; transition: fill 120ms, stroke 120ms; pointer-events: visiblePainted; cursor: pointer; }
+.sectors path:is(.active, :hover) { fill: #39266a; stroke: #c5abff; stroke-width: 1.7; }
+.sectors path.disabled { fill: #14111ec9; stroke: #392d50; cursor: default; }
+
+.action {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 23%;
+    height: 17%;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    gap: 2px;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    pointer-events: auto;
+}
+
+.action:disabled { color: #aca4b8; cursor: default; }
+.action svg, .reticle svg { width: 23px; height: 23px; fill: none; stroke: currentColor; stroke-width: 1.65; stroke-linecap: round; stroke-linejoin: round; }
+.action svg { color: var(--violet); }
+.action:disabled svg { color: #827592; }
+.action strong { font-size: clamp(10px, 2.15vmin, 14px); line-height: 1.15; }
+.action small, .hub small { font-size: clamp(8px, 1.65vmin, 11px); color: var(--muted); }
+
+.hub {
+    position: absolute;
+    inset: 34%;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    gap: 4px;
+    border: 1px solid #8c6ec8;
+    border-radius: 50%;
+    background: var(--ink);
+    box-shadow: inset 0 0 22px #a78bfa22, 0 0 32px #100a20a0;
+}
+
+.hub:hover { border-color: #ddcaff; }
+.hub-key { font-size: clamp(15px, 4.4vmin, 29px); font-weight: 800; letter-spacing: .09em; color: #dccaff; }
+.hub > span:nth-child(2) { font-size: clamp(7px, 1.45vmin, 10px); font-weight: 700; letter-spacing: .15em; }
+
+.target {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    pointer-events: none;
+}
+
+.reticle {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    transform: translate(-50%, -50%);
+    border: 1px solid #fff6;
+    border-radius: 50%;
+    background: #13101bd9;
+    color: #e5deef;
+}
+
+.target.active .reticle { color: #e4d2ff; border-color: var(--violet); box-shadow: 0 0 18px #a78bfa65; }
+.target-panel {
+    position: absolute;
+    top: -18px;
+    left: 29px;
+    width: max-content;
+    max-width: 42vw;
+    min-width: min(215px, 42vw);
+    padding: 9px;
+    border: 1px solid #7054a3;
+    border-radius: 10px;
+    background: #14101eea;
+    box-shadow: 0 8px 32px #0007;
+}
+
+.target-title { padding: 3px 7px 7px; color: var(--violet); font-size: 10px; font-weight: 800; letter-spacing: .16em; }
+.target ol { display: grid; gap: 3px; margin: 0; padding: 0; list-style: none; }
+.target li { padding: 5px 8px; border-left: 2px solid transparent; border-radius: 4px; font-size: 13px; overflow-wrap: anywhere; }
+.target li.selected { border-color: var(--violet); background: #39266a; }
+.target-hint { padding: 8px 7px 2px; color: var(--muted); font-size: 10px; }
+.target-hint span { color: var(--violet); }
+kbd { font-family: inherit; color: #eee2ff; font-weight: 700; }
+
+.notice {
+    position: fixed;
+    bottom: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 85vw;
+    padding: 10px 16px;
+    border: 1px solid #7054a3;
+    border-radius: 8px;
+    background: #14101ef2;
+    font-size: 13px;
+    pointer-events: none;
+}
+
+@keyframes enter {
+    from { transform: scale(.96); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+}
