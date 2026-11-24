@@ -81,3 +81,11 @@ end)
 `name`, `label` et `event` sont obligatoires. Les filtres `kind`, `model` et `distance` sont facultatifs. `kind` accepte `ped`, `vehicle` ou `object`. L’événement client reçoit l’entité ciblée.
 
 Pour retirer l’option, appelle `exports['ALT']:RemoveTargetOption('examiner_distributeur')`. ALT retire aussi les options d’une ressource quand elle s’arrête.
+
+---
+
+## Auteur et maintenance
+
+**Développé par SYX** — [GitHub @syxezyou](https://github.com/syxezyou).
+
+Pour signaler un problème, indiquez la version utilisée, les étapes de reproduction et les messages d’erreur pertinents. Ne publiez jamais de clés privées, de mots de passe ou de jetons.
